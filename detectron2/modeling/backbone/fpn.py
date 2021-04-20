@@ -151,6 +151,11 @@ class FPN(Backbone):
                 top_block_in_feature = results[self._out_features.index(self.top_block.in_feature)]
             results.extend(self.top_block(top_block_in_feature))
         assert len(self._out_features) == len(results)
+
+        # Return List[Tensor] when scripted
+        if torch.jit.is_tracing():
+            return results
+
         return {f: res for f, res in zip(self._out_features, results)}
 
     def output_shape(self):

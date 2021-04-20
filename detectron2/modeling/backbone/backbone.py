@@ -25,6 +25,8 @@ class Backbone(nn.Module, metaclass=ABCMeta):
 
         Returns:
             dict[str->Tensor]: mapping from feature name (e.g., "res2") to tensor
+            OR
+            List[Tensor]: list of features, when the model is jit.scripted
         """
         pass
 
